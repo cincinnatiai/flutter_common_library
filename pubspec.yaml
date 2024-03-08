@@ -12,9 +12,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Json
-  json_annotation: ^4.8.0
-
   # state management
   flutter_bloc: ^8.1.2
   equatable: ^2.0.5

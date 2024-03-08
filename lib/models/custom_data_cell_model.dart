@@ -1,8 +1,6 @@
 import 'package:common/models/icon_options_model.dart';
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable()
 class CustomDataCellModel {
   final DataCellWidget type;
   final String? text;

@@ -1,0 +1,11 @@
+const String fetchAllAction = "fetchAll";
+const String findMeAction = "findMe";
+const String createAction = "create";
+const String updateAction = "update";
+const String deleteAction = "delete";
+const String fetchByUserAction = "fetchByUser";
+const String clientType = "consumer";
+const String fetch = "fetch";
+final RegExp emailRegExp = RegExp(
+    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+final RegExp numberRegExp = RegExp(r'[0-9.]');

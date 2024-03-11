@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class CustomSearchBar extends StatelessWidget {
   final TextEditingController textController;
   final String buttonText;
+  final bool showButton;
   final Function() onButtonClicked;
   final String inputText;
 
@@ -15,6 +16,7 @@ class CustomSearchBar extends StatelessWidget {
     required this.buttonText,
     required this.onButtonClicked,
     required this.inputText,
+    this.showButton = true,
   });
 
   @override
@@ -36,16 +38,17 @@ class CustomSearchBar extends StatelessWidget {
               labelText: inputText,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: DimensCommon.twelve),
-            child: CustomButton(
-              width: DimensCommon.oneHundredTwenty,
-              onPressed: () {
-                onButtonClicked();
-              },
-              buttonText: buttonText,
+          if (showButton)
+            Padding(
+              padding: const EdgeInsets.only(left: DimensCommon.twelve),
+              child: CustomButton(
+                width: DimensCommon.oneHundredTwenty,
+                onPressed: () {
+                  onButtonClicked();
+                },
+                buttonText: buttonText,
+              ),
             ),
-          ),
         ],
       ),
     );

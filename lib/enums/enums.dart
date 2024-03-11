@@ -15,3 +15,8 @@ enum WidgetType {
   urlLauncher,
   dropdown,
 }
+
+enum VisaOptions {
+  status,
+  country,
+}

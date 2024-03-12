@@ -9,7 +9,7 @@ enum Justify { center, left, right }
 enum TextSize { small, medium, large }
 
 class CustomButton extends StatelessWidget {
-  final ButtonType buttonType;
+  final ButtonType? buttonType;
   final Justify? alignment;
   final Color? borderColor;
   final Color? fillColor;
@@ -96,6 +96,11 @@ class CustomButton extends StatelessWidget {
         effectiveFillColor = [gradientColor1, gradientColor2];
         effectiveTextColor = Colors.white;
         effectiveBorderColor = Colors.transparent;
+        break;
+      case null:
+        effectiveBorderColor = theme.colorScheme.primary;
+        effectiveFillColor = [theme.colorScheme.primary];
+        effectiveTextColor = theme.colorScheme.onTertiaryContainer;
         break;
     }
 

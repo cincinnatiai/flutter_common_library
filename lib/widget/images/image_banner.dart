@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 enum SVGImageSize { small, medium, large }
 
-class SVGBanner extends StatelessWidget {
+class ImageBanner extends StatelessWidget {
   final String path;
   final Color? backgroundColor;
   final double? width;
@@ -11,7 +11,7 @@ class SVGBanner extends StatelessWidget {
   final SVGImageSize? sVGImageSize;
   final Function()? onPressed;
 
-  const SVGBanner({
+  const ImageBanner({
     super.key,
     this.backgroundColor,
     this.width,
@@ -38,13 +38,17 @@ class SVGBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     double? finalWidth = width;
     double? finalHeight = height;
+    bool isSVG = false;
+
+    if (path.contains(".svg")) {
+      isSVG = true;
+    }
 
     if (sVGImageSize != null) {
       final imageSize = getImageSize(sVGImageSize);
       finalWidth = imageSize;
       finalHeight = imageSize;
     }
-
     return GestureDetector(
       onTap: () {
         if (onPressed != null) {
@@ -56,9 +60,8 @@ class SVGBanner extends StatelessWidget {
         height: finalHeight,
         color: backgroundColor,
         child: Center(
-            child: SvgPicture.asset(
-          path,
-        )),
+          child: isSVG ? SvgPicture.asset(path) : Image.asset(path),
+        ),
       ),
     );
   }

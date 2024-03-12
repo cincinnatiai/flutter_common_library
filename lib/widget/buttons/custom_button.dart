@@ -2,16 +2,17 @@ import 'package:common/constants/dimens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-enum ButtonType { primary, white, blocked, whiteImpact }
+enum ButtonType { primary, white, blocked, whiteImpact, gradient }
 
 enum Justify { center, left, right }
 
 enum TextSize { small, medium, large }
 
 class CustomButton extends StatelessWidget {
-  final ButtonType? buttonType;
+  final ButtonType buttonType;
   final Justify? alignment;
   final Color? borderColor;
+  final Color? fillColor;
   final List<Color>? fillColors;
   final double? borderWidth;
   final double? width;
@@ -26,6 +27,7 @@ class CustomButton extends StatelessWidget {
     this.buttonType = ButtonType.primary,
     this.alignment,
     this.borderColor,
+    this.fillColor,
     this.fillColors,
     this.borderWidth,
     this.width,
@@ -64,43 +66,37 @@ class CustomButton extends StatelessWidget {
     MainAxisAlignment rowAlignment;
     Color gradientColor2;
     Color gradientColor1;
+    bool isGradientTheme = false;
 
     switch (buttonType) {
       case ButtonType.primary:
-        gradientColor2 = const Color(0xFF0BBCAE);
-        gradientColor1 = const Color(0xFF2A55D5);
-        effectiveFillColor = [gradientColor1, gradientColor2];
-        effectiveTextColor = Colors.white;
-        effectiveBorderColor = Colors.transparent;
-
+        effectiveBorderColor = theme.colorScheme.primary;
+        effectiveFillColor = [theme.colorScheme.primary];
+        effectiveTextColor = theme.colorScheme.onTertiaryContainer;
         break;
       case ButtonType.white:
-        gradientColor2 = const Color(0xFFFFFFFF);
-        gradientColor1 = const Color(0xFFFFFFFF);
-        effectiveFillColor = [gradientColor1, gradientColor2];
-        effectiveBorderColor = Colors.white;
+        effectiveBorderColor = theme.colorScheme.onTertiaryContainer;
+        effectiveFillColor = [theme.colorScheme.onTertiaryContainer];
         effectiveTextColor = theme.colorScheme.primary;
         break;
       case ButtonType.whiteImpact:
-        gradientColor2 = const Color(0xFFFFFFFF);
-        gradientColor1 = const Color(0xFFFFFFFF);
-        effectiveFillColor = [gradientColor1, gradientColor2];
         effectiveBorderColor = theme.colorScheme.primary;
+        effectiveFillColor = [theme.colorScheme.onTertiaryContainer];
         effectiveTextColor = theme.colorScheme.primary;
         break;
       case ButtonType.blocked:
-        gradientColor2 = const Color.fromARGB(255, 73, 73, 73);
-        gradientColor1 = const Color.fromARGB(255, 55, 55, 57);
+        effectiveBorderColor = theme.colorScheme.tertiary;
+        effectiveFillColor = [theme.colorScheme.tertiary];
+        effectiveTextColor = theme.colorScheme.onTertiaryContainer;
+        break;
+      case ButtonType.gradient:
+        isGradientTheme = true;
+        gradientColor2 = const Color(0xFF0BBCAE);
+        gradientColor1 = const Color(0xFF2A55D5);
         effectiveFillColor = [gradientColor1, gradientColor2];
         effectiveTextColor = Colors.white;
         effectiveBorderColor = Colors.transparent;
         break;
-      case null:
-        gradientColor2 = const Color(0xFF0BBCAE);
-        gradientColor1 = const Color(0xFF2A55D5);
-        effectiveBorderColor = borderColor ?? theme.colorScheme.primary;
-        effectiveFillColor = fillColors ?? [gradientColor1, gradientColor2];
-        effectiveTextColor = textColor ?? Colors.white;
     }
 
     switch (alignment) {
@@ -122,7 +118,9 @@ class CustomButton extends StatelessWidget {
       width: effectiveWidth,
       height: effectiveHeight,
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: effectiveFillColor),
+        color: isGradientTheme ? null : effectiveFillColor[0],
+        gradient:
+            isGradientTheme ? LinearGradient(colors: effectiveFillColor) : null,
         border: Border.all(
           color: effectiveBorderColor,
           width: effectiveBorderWidth,

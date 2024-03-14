@@ -73,7 +73,6 @@ class ImageBanner extends StatelessWidget {
               path,
               width: finalWidth,
               height: finalHeight,
-              color: backgroundColor,
               fit: fit,
             ),
     );

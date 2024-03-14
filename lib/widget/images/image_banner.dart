@@ -57,16 +57,25 @@ class ImageBanner extends StatelessWidget {
           onPressed!();
         }
       },
-      child: Container(
-        width: finalWidth,
-        height: finalHeight,
-        color: backgroundColor,
-        child: Center(
-          child: isSVG
-              ? SvgPicture.asset(path, fit: fit ?? BoxFit.contain)
-              : Image.asset(path, fit: fit),
-        ),
-      ),
+      child: isSVG
+          ? Container(
+              width: finalWidth,
+              height: finalHeight,
+              color: backgroundColor,
+              child: Center(
+                child: SvgPicture.asset(
+                  path,
+                  fit: fit ?? BoxFit.contain,
+                ),
+              ),
+            )
+          : Image.asset(
+              path,
+              width: finalWidth,
+              height: finalHeight,
+              color: backgroundColor,
+              fit: fit,
+            ),
     );
   }
 }

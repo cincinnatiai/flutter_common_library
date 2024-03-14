@@ -9,6 +9,7 @@ class ImageBanner extends StatelessWidget {
   final double? width;
   final double? height;
   final SVGImageSize? sVGImageSize;
+  final BoxFit? fit;
   final Function()? onPressed;
 
   const ImageBanner({
@@ -19,6 +20,7 @@ class ImageBanner extends StatelessWidget {
     required this.path,
     this.sVGImageSize,
     this.onPressed,
+    this.fit,
   });
 
   double getImageSize(SVGImageSize? size) {
@@ -60,7 +62,9 @@ class ImageBanner extends StatelessWidget {
         height: finalHeight,
         color: backgroundColor,
         child: Center(
-          child: isSVG ? SvgPicture.asset(path) : Image.asset(path),
+          child: isSVG
+              ? SvgPicture.asset(path, fit: fit ?? BoxFit.contain)
+              : Image.asset(path, fit: fit),
         ),
       ),
     );

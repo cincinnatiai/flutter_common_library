@@ -9,7 +9,7 @@ This library contains all the basic widgets
 common:
     git:
       url: https://github.com/cincinnatiai/flutter_common_library.git
-      fer: main
+      ref: main
 ```
 
 ## Dependencies
